@@ -10,20 +10,17 @@ import net.minecraftforge.fml.common.Mod;
 public class BreakSpeed {
     @SubscribeEvent
     public static void onBreakSpeedEvent(PlayerEvent.BreakSpeed event) {
-
-        float multiplier = 1.0f;
         Player player = event.getPlayer();
 
         if (player.isInWater()) {
             if (player.isEyeInFluid(FluidTags.WATER)) {
-                multiplier *= 5.0f;
+                event.setNewSpeed(event.getNewSpeed() * 5);
             }
         }
         if (!player.isOnGround()) {
-            multiplier *= 5.0f;
+            event.setNewSpeed(event.getNewSpeed() * 5);
         }
 
-        event.setNewSpeed(event.getNewSpeed() * multiplier);
-
     }
+
 }
